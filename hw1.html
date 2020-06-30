@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <div id="message"></div></br>
+    <input type="number" id="number"/>
+    <button id="guessButton">Guess</button>
+    <p id="past"></p>
+    <script>
+        var value = Math.floor(Math.random()*100)+1;
+        let button = document.getElementById('guessButton');
+        var guesses = 0;
+        var pastGuesses = [];
+        button.addEventListener('click', function(){
+            guesses++;
+            let userGuess = document.getElementById('number').value;
+            parseInt(userGuess);
+            pastGuesses.push(userGuess);
+            document.getElementById('past').innerHTML = "Past guesses : " + pastGuesses;
+            msg = document.getElementById("message");
+            if(guesses<10){
+                if(userGuess==value){
+                msg.innerHTML = "Congratulations!! You guessed correctly";
+                msg.style.backgroundColor = "green";
+                guesses = 10;
+                }
+                else if(userGuess>value){
+                    msg.innerHTML = "Sorry your guess is too high. You have " + (10-guesses) + " guesses left.";
+                    msg.style.backgroundColor = "red";
+                }else{
+                    msg.innerHTML = "Sorry your guess is too low. You have " + (10-guesses) + " guesses left.";
+                    msg.style.backgroundColor = "red";
+                }
+            }else{
+                if(userGuess!=value){
+                    msg.innerHTML="You have run out of guesses.";
+                    msg.style.backgroundColor = "red";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
